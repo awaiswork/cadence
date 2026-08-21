@@ -52,7 +52,6 @@ export default function DailyLog({ today, onNavigate }) {
           type="date"
           value={date}
           onChange={(e) => e.target.value && setDate(e.target.value)}
-          className="field"
           style={{ width: 'auto' }}
         />
         <Button
@@ -153,7 +152,7 @@ export default function DailyLog({ today, onNavigate }) {
                       >
                         <Icon name="minus" />
                       </Button>
-                      <input
+                      <Input
                         type="number"
                         inputMode="decimal"
                         min="0"
@@ -164,7 +163,7 @@ export default function DailyLog({ today, onNavigate }) {
                           actions.setLog(activity.id, date, e.target.value === '' ? 0 : e.target.value)
                         }
                         aria-label={`${activity.name} count`}
-                        className="tabular field w-14 px-1 text-center"
+                        className="tabular w-14 px-1 text-center"
                       />
                       <Button
                         size="sm"
@@ -189,12 +188,12 @@ export default function DailyLog({ today, onNavigate }) {
                   </div>
 
                   {noteOpen && (
-                    <input
+                    <Input
                       type="text"
                       value={entry?.note || ''}
                       placeholder="Note (optional)"
                       onChange={(e) => actions.setLog(activity.id, date, count, e.target.value)}
-                      className="field mt-2 text-xs"
+                      className="mt-2 text-xs"
                     />
                   )}
                 </li>

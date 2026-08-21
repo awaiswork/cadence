@@ -151,7 +151,7 @@ function TracksCard({ tracks, activities, actions }) {
                   value={track.name}
                   onChange={(e) => actions.updateTrack(track.id, { name: e.target.value })}
                   aria-label="Track name"
-                  className="field min-w-32 flex-1"
+                  className="min-w-32 flex-1"
                 />
 
                 <span className="hidden w-24 shrink-0 text-xs text-ink-3 sm:inline">
@@ -273,14 +273,14 @@ function ActivitiesCard({ tracks, activities, actions, state }) {
                     value={activity.name}
                     onChange={(e) => actions.updateActivity(activity.id, { name: e.target.value })}
                     aria-label="Activity name"
-                    className="field min-w-36 flex-1"
+                    className="min-w-36 flex-1"
                   />
 
                   <Select
                     value={activity.trackId}
                     onChange={(e) => actions.updateActivity(activity.id, { trackId: e.target.value })}
                     aria-label="Track"
-                    className="field w-40 shrink-0"
+                    className="w-40 shrink-0"
                   >
                     {tracks.map((t) => (
                       <option key={t.id} value={t.id}>
@@ -302,7 +302,7 @@ function ActivitiesCard({ tracks, activities, actions, state }) {
                         })
                       }
                       aria-label={`Weekly target for ${activity.name}`}
-                      className="tabular field w-16 text-center"
+                      className="tabular w-16 text-center"
                     />
                   </label>
 
@@ -311,7 +311,7 @@ function ActivitiesCard({ tracks, activities, actions, state }) {
                     onChange={(e) => actions.updateActivity(activity.id, { unit: e.target.value })}
                     placeholder="unit"
                     aria-label="Unit"
-                    className="field w-20 shrink-0"
+                    className="w-20 shrink-0"
                   />
 
                   <ConfirmButton
@@ -453,14 +453,14 @@ function MilestonesCard({ state, actions }) {
                     actions.updateMilestone(m.id, { weekNumber: Math.max(1, Number(e.target.value) || 1) })
                   }
                   aria-label="Week number"
-                  className="tabular field w-14 text-center"
+                  className="tabular w-14 text-center"
                 />
               </label>
               <Input
                 value={m.description}
                 onChange={(e) => actions.updateMilestone(m.id, { description: e.target.value })}
                 aria-label="Milestone description"
-                className="field min-w-40 flex-1"
+                className="min-w-40 flex-1"
               />
               <Check checked={m.done} onChange={(checked) => actions.updateMilestone(m.id, { done: checked })}>
                 <span className="text-xs text-ink-2">Done</span>
@@ -479,14 +479,14 @@ function MilestonesCard({ state, actions }) {
           value={draft.weekNumber}
           onChange={(e) => setDraft({ ...draft, weekNumber: e.target.value })}
           aria-label="Week number for new milestone"
-          className="tabular field w-16 text-center"
+          className="tabular w-16 text-center"
         />
         <Input
           value={draft.description}
           onChange={(e) => setDraft({ ...draft, description: e.target.value })}
           onKeyDown={(e) => e.key === 'Enter' && add()}
           placeholder="New milestone"
-          className="field min-w-40 flex-1"
+          className="min-w-40 flex-1"
         />
         <Button variant="primary" onClick={add} disabled={!draft.description.trim()}>
           <Icon name="plus" /> Add

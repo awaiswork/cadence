@@ -58,20 +58,23 @@ export function Field({ label, hint, className = '', children }) {
   )
 }
 
-export function Input(props) {
-  return <input className="field" {...props} />
+/* Form controls MERGE an incoming className onto their base classes rather than
+   replacing them — passing `className="w-20"` must not silently strip `.field`. */
+
+export function Input({ className = '', ...props }) {
+  return <input className={`field ${className}`} {...props} />
 }
 
-export function Select({ children, ...props }) {
+export function Select({ className = '', children, ...props }) {
   return (
-    <select className="field appearance-none bg-surface pr-6" {...props}>
+    <select className={`field appearance-none ${className}`} {...props}>
       {children}
     </select>
   )
 }
 
-export function Textarea({ rows = 3, ...props }) {
-  return <textarea rows={rows} className="field resize-y" {...props} />
+export function Textarea({ rows = 3, className = '', ...props }) {
+  return <textarea rows={rows} className={`field resize-y ${className}`} {...props} />
 }
 
 /** Checkbox + label, sized for thumbs on mobile. */

@@ -138,7 +138,7 @@ export default function Pipeline({ today = todayISO() }) {
           placeholder="Search company, contact, role, notes…"
           value={filters.q}
           onChange={(e) => setFilters((f) => ({ ...f, q: e.target.value }))}
-          className="field min-w-40 flex-1"
+          className="min-w-40 flex-1"
         />
         <Select
           value={filters.channel}
@@ -160,7 +160,7 @@ export default function Pipeline({ today = todayISO() }) {
             setSort({ key, dir })
           }}
           aria-label="Sort by"
-          className="field sm:hidden"
+          className="sm:hidden"
           style={{ width: 'auto' }}
         >
           {COLUMNS.map((c) => (
