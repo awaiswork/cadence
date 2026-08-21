@@ -1,0 +1,140 @@
+@import 'tailwindcss';
+
+/* ==========================================================================
+   Design tokens
+   --------------------------------------------------------------------------
+   The chrome is deliberately monochrome: track colours are the only saturated
+   hues in the interface, so a glance at a bar tells you which track it belongs
+   to. Semantic colours (ok / warn / bad) are reserved for status, never decor.
+   ========================================================================== */
+@theme {
+  --color-ink: #0b1220;
+  --color-ink-2: #475569;
+  --color-ink-3: #94a3b8;
+  --color-line: #e2e8f0;
+  --color-line-2: #cbd5e1;
+  --color-surface: #ffffff;
+  --color-canvas: #f5f6f8;
+  --color-ok: #15803d;
+  --color-ok-bg: #f0fdf4;
+  --color-warn: #b45309;
+  --color-warn-bg: #fffbeb;
+  --color-bad: #b91c1c;
+  --color-bad-bg: #fef2f2;
+
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+}
+
+/* No animations anywhere — the app should feel instant, not animated. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Counts, targets and percentages line up in columns. */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Keyboard focus stays visible everywhere; pointer focus does not add noise. */
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 1px;
+  border-radius: 3px;
+}
+
+/* Number inputs: hide the spinners, they are useless at this size. */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+/* Native date inputs on iOS collapse unless given an explicit min-height. */
+input[type='date'] {
+  min-height: 34px;
+}
+
+/* ==========================================================================
+   Repeated primitives
+   Only patterns used in three or more places live here; everything else stays
+   as utilities on the element so it is greppable.
+   ========================================================================== */
+@layer components {
+  .field {
+    @apply w-full rounded-md border border-line bg-surface px-2 py-1.5 text-sm text-ink
+      placeholder:text-ink-3 focus:border-ink-2 focus:outline-none;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-md border px-2.5 py-1.5
+      text-sm font-medium whitespace-nowrap select-none disabled:opacity-40
+      disabled:pointer-events-none;
+  }
+  .btn-default {
+    @apply border-line bg-surface text-ink hover:bg-canvas;
+  }
+  .btn-primary {
+    @apply border-ink bg-ink text-white hover:bg-ink-2 hover:border-ink-2;
+  }
+  .btn-danger {
+    @apply border-line bg-surface text-bad hover:bg-bad-bg hover:border-bad;
+  }
+  .btn-sm {
+    @apply px-2 py-1 text-xs;
+  }
+
+  /* Selects need a caret; `appearance-none` removes the native one so the
+     control matches Input's height and border exactly across browsers. */
+  select.field {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%2394a3b8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 6px center;
+    padding-right: 26px;
+  }
+
+  .card {
+    @apply rounded-lg border border-line bg-surface;
+  }
+
+  .label {
+    @apply block text-xs font-medium text-ink-2;
+  }
+
+  /* Section heading: small, uppercase, low-contrast — dense but scannable. */
+  .eyebrow {
+    @apply text-[11px] font-semibold tracking-wider text-ink-3 uppercase;
+  }
+}
+
+/* Print: the check-in and weekly review should print cleanly if ever needed. */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+}
